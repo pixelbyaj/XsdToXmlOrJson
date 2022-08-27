@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSDConverter", "XSDConverter.csproj", "{1101E8D5-BB9D-4D06-9BD4-DDD78E13F897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XSDLib", "..\XSDLib\XSDLib.csproj", "{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1101E8D5-BB9D-4D06-9BD4-DDD78E13F897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1101E8D5-BB9D-4D06-9BD4-DDD78E13F897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1101E8D5-BB9D-4D06-9BD4-DDD78E13F897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1101E8D5-BB9D-4D06-9BD4-DDD78E13F897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B56E6E2-E53C-4747-A4AA-127CC4234772}
+	EndGlobalSection
+EndGlobal

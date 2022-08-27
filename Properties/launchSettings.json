@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "XSDConverter": {
+      "commandName": "Project",
+      "commandLineArgs": "/source C:\\source\\xsd\\camt.053.001.10.xsd /outputType json"
+    }
+  }
+}

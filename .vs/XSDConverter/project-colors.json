@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "1101e8d5-bb9d-4d06-9bd4-ddd78e13f897": {
+      "ProjectGuid": "1101e8d5-bb9d-4d06-9bd4-ddd78e13f897",
+      "DisplayName": "XSDConverter",
+      "ColorIndex": 0
+    },
+    "73f99c57-8fd9-4779-b5e2-6159c2e6ae70": {
+      "ProjectGuid": "73f99c57-8fd9-4779-b5e2-6159c2e6ae70",
+      "DisplayName": "XSDLib",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
