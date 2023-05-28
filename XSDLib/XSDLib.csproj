@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>XSD Library</Title>
+    <Authors>RUDSTA CORP</Authors>
+    <Description>XSD library to convert complex XSD to JSON or XML</Description>
+    <Copyright>RUDSTA CORPORATION PRIVATE LIMITED</Copyright>
   </PropertyGroup>
 
 </Project>
