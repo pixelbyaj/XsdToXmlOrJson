@@ -14,7 +14,8 @@ namespace XSDLib
         {
             Elements = new List<SchemaElement>();
         }
-
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
         [JsonPropertyName("dataType")]

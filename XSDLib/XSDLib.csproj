@@ -4,9 +4,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>XSD Library</Title>
-    <Authors>RUDSTA CORP</Authors>
-    <Description>XSD library to convert complex XSD to JSON or XML</Description>
-    <Copyright>RUDSTA CORPORATION PRIVATE LIMITED</Copyright>
+    <Authors>Abhishek Joshi</Authors>
+    <Description>XSD library to convert complex XSD to JSON </Description>
+    <Copyright>Abhishek Joshi</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

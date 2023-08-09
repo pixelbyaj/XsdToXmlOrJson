@@ -58,14 +58,13 @@ namespace XSDLib
         #endregion
 
         #region public member
-        public string SchemaXML { get; private set; }
         public string SchemaJson { get; private set; }
         public SchemaElement SchemaElement { get; private set; }
         #endregion
 
         #region public method
         /// <summary>
-        /// Convert the XSD to XML, JSON and SchemaElement Object
+        /// Convert the XSD JSON Object
         /// </summary>
         public void Convert()
         {
@@ -73,13 +72,11 @@ namespace XSDLib
             XmlSchemaSet schemaSet = new();
             schemaSet.Add(myschema);
             schemaSet.Compile();
-            //StringBuilder stringBuilder = new();
-            //using XmlWriter xmlWriter = XmlWriter.Create(stringBuilder, writerSettings);
-            //xmlWriter.WriteStartDocument();
             var schemaElement = new SchemaElement
             {
                 Name = "Document",
-                XPath = "Document"
+                XPath = "Document",
+                Id="document"
             };
             foreach (XmlSchemaElement element in myschema.Elements.Values)
             {
@@ -137,15 +134,6 @@ namespace XSDLib
         }
         private void GetComplexType(XmlSchemaComplexType xmlSchemaComplexType, SchemaElement schemaElement)
         {
-            var contentTypeParticle = xmlSchemaComplexType.ContentTypeParticle;
-            if (!string.IsNullOrEmpty(contentTypeParticle.MinOccursString))
-            {
-                schemaElement.MinOccurs = contentTypeParticle.MinOccursString;
-            }
-            if (!string.IsNullOrEmpty(contentTypeParticle.MaxOccursString))
-            {
-                schemaElement.MaxOccurs = contentTypeParticle.MinOccursString;
-            }
             Iterate(xmlSchemaComplexType, schemaElement);
         }
         private void AddSchemaElement(XmlSchemaObjectCollection xmlSchemaObjectCollection, SchemaElement schemaElement)
@@ -160,7 +148,10 @@ namespace XSDLib
                     var element = new SchemaElement
                     {
                         Name = childElement.Name,
-                        XPath = string.Join("/", XPath.ToArray())
+                        XPath = string.Join("/", XPath.ToArray()),
+                        Id = string.Join("_", XPath.ToArray()).ToLower(),
+                        MaxOccurs = System.Convert.ToString(childElement.MaxOccurs == Decimal.MaxValue ? "unbounded" : childElement.MaxOccurs),
+                        MinOccurs = System.Convert.ToString(childElement.MinOccurs),
                     };
 
                     if (childElement.ElementSchemaType is XmlSchemaComplexType xmlSchemaComplexType)
@@ -170,7 +161,6 @@ namespace XSDLib
                     }
                     else if (childElement.ElementSchemaType is XmlSchemaSimpleType xmlSchemaSimpleType)
                     {
-                        // schemaElement.XPath = string.Join("/", XPath.ToArray());
                         GetSimpleType(xmlSchemaSimpleType, element);
                     }
                     schemaElement.Elements.Add(element);
@@ -179,6 +169,17 @@ namespace XSDLib
                 else if (xmlSchemaObjectCollection[i] is XmlSchemaAny)
                 {
                     XPath.Add("Any");
+                    var childElement = xmlSchemaObjectCollection[i] as XmlSchemaAny;
+
+                    var element = new SchemaElement
+                    {
+                        Name = childElement.Namespace,
+                        DataType = "any",
+                        XPath = string.Join("/", XPath.ToArray()),
+                        Id = string.Join("_", XPath.ToArray()).ToLower()
+                    };
+                    schemaElement.Elements.Add(element);
+                    XPath.RemoveAt(XPath.Count - 1);
                 }
 
             }
