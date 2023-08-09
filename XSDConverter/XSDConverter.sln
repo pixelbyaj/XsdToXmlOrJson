@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSDConverter", "XSDConverter.csproj", "{1101E8D5-BB9D-4D06-9BD4-DDD78E13F897}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSDService", "..\XSDLib\XSDService.csproj", "{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XSDService", "..\XSDService\XSDService.csproj", "{73F99C57-8FD9-4779-B5E2-6159C2E6AE70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

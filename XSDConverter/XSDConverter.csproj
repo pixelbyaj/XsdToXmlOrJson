@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XSDLib\XSDService.csproj" />
+    <ProjectReference Include="..\XSDService\XSDService.csproj" />
   </ItemGroup>
 
 </Project>
