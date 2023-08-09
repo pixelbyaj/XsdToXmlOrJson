@@ -11,9 +11,14 @@
     <RepositoryUrl>https://github.com/pixelbyaj/XsdToXmlOrJson</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>iso20022;xsd;xml</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
