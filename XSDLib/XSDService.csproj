@@ -8,6 +8,9 @@
     <Description>XSD library to convert complex XSD to JSON </Description>
     <Copyright>Abhishek Joshi</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/pixelbyaj/XsdToXmlOrJson</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>iso20022;xsd;xml</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

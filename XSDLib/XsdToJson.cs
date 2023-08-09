@@ -1,12 +1,11 @@
 ﻿
-namespace XSDLib
+namespace XSDService
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Text.Json;
     using System.Xml;
     using System.Xml.Schema;
@@ -14,10 +13,10 @@ namespace XSDLib
     /// <summary>
     /// XSD Converter Library
     /// </summary>
-    public class XSDLib
+    public class XsdToJson
     {
         #region constructor
-        public XSDLib(string filePath)
+        public XsdToJson(string filePath)
         {
             xmlTextReader = new XmlTextReader(filePath);
             writerSettings = new XmlWriterSettings
@@ -27,7 +26,7 @@ namespace XSDLib
             };
             XPath = new List<string>();
         }
-        public XSDLib(string xsdSchema, JsonSerializerOptions options = null)
+        public XsdToJson(string xsdSchema, JsonSerializerOptions options = null)
         {
             xmlTextReader = new XmlTextReader(new StringReader(xsdSchema));
             writerSettings = new XmlWriterSettings

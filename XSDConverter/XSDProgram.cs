@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using XSDLib;
+using XSDService;
 
 namespace XSDConverter
 {
@@ -10,7 +10,7 @@ namespace XSDConverter
         private const string _paramSource="source";
         private const string _paramOutputType="outputType";
         private static CommandLineParser commandLineParser;
-        private static XSDLib.XSDLib xsdLib;
+        private static XsdToJson xsdLib;
         static void Main(string[] args)
         {
             if (args.Length > 0)
@@ -24,7 +24,7 @@ namespace XSDConverter
                     var fileInfo = new FileInfo(source);
                     if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
                     {
-                        xsdLib = new XSDLib.XSDLib(source);
+                        xsdLib = new XsdToJson(source);
                         xsdLib.Convert();
                         if (commandLineParser.Arguments.ContainsKey(_paramOutputType))
                         {
@@ -33,15 +33,6 @@ namespace XSDConverter
                             {
                                 File.AppendAllText(fileInfo.FullName.Replace(".xsd", ".json"), xsdLib.SchemaJson);
                             }
-                            else
-                            {
-                                File.AppendAllText(fileInfo.FullName.Replace(".xsd", ".xml"), xsdLib.SchemaXML);
-
-                            }
-                        }
-                        else
-                        {
-                            File.AppendAllText(fileInfo.FullName.Replace(".xsd", ".xml"), xsdLib.SchemaXML);
                         }
                     }
                 }
