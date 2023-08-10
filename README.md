@@ -28,4 +28,26 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
     File.AppendAllText(fileInfo.FullName.Replace(".xsd", ".json"), xsdLib.SchemaJson);
 }
 ```
+## Model of JSON
+```json
+{
+    id: string;
+    name: string;
+    dataType: string;
+    minOccurs: string;
+    maxOccurs: string;
+    minLength: string;
+    maxLength: string;
+    pattern: string;
+    fractionDigits: string;
+    totalDigits: string;
+    minInclusive: string;
+    maxInclusive: string;
+    values: string[];
+    isCurrency: boolean;
+    xpath: string;
+    elements: SchemaElement[];
+    children: SchemaElement[];
+}
 
+```
