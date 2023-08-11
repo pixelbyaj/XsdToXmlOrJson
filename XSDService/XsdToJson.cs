@@ -75,7 +75,8 @@ namespace XSDService
             {
                 Name = "Document",
                 XPath = "Document",
-                Id="document"
+                Id="document",
+                MinOccurs = "1"
             };
             foreach (XmlSchemaElement element in myschema.Elements.Values)
             {
@@ -185,7 +186,7 @@ namespace XSDService
         }
         private static void GetSimpleType(XmlSchemaSimpleType xmlSchemaSimpleType, SchemaElement schemaElement)
         {
-            schemaElement.DataType = xmlSchemaSimpleType.Datatype.ValueType.Name;
+            schemaElement.DataType = xmlSchemaSimpleType.Datatype.TypeCode.ToString().ToLower();
             if (xmlSchemaSimpleType.Content is XmlSchemaSimpleTypeRestriction content)
             {
                 GetAttributes(content, schemaElement);

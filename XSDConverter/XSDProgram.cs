@@ -31,7 +31,7 @@ namespace XSDConverter
                             var target = commandLineParser.Arguments[_paramOutputType][0];
                             if ("json" == target.ToLowerInvariant())
                             {
-                                File.AppendAllText(fileInfo.FullName.Replace(".xsd", ".json"), xsdLib.SchemaJson);
+                                File.WriteAllText(fileInfo.FullName.Replace(".xsd", ".json"), xsdLib.SchemaJson);
                             }
                         }
                     }

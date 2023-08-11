@@ -47,7 +47,10 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
     isCurrency: boolean;
     xpath: string;
     elements: SchemaElement[];
-    children: SchemaElement[];
-}
-
+} 
 ```
+
+## Changes
+### Version 1.1.1 release
+  * Date and DateTime supported.
+  * Base Element 'Document' will always be with   minOccurs 1
