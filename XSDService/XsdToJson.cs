@@ -18,7 +18,19 @@ namespace XSDService
         #region constructor
         public XsdToJson(string filePath)
         {
+            ArgumentNullException.ThrowIfNull(filePath, nameof(filePath));
             xmlTextReader = new XmlTextReader(filePath);
+            writerSettings = new XmlWriterSettings
+            {
+                ConformanceLevel = ConformanceLevel.Auto,
+                CloseOutput = false
+            };
+            XPath = new List<string>();
+        }
+        public XsdToJson(XmlTextReader xmlTextReader)
+        {
+            ArgumentNullException.ThrowIfNull(xmlTextReader, nameof(xmlTextReader));
+            this.xmlTextReader = xmlTextReader;
             writerSettings = new XmlWriterSettings
             {
                 ConformanceLevel = ConformanceLevel.Auto,

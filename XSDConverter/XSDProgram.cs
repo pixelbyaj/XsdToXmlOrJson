@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using System.Collections.Generic;
 using System.IO;
 using XSDService;
@@ -24,7 +25,8 @@ namespace XSDConverter
                     var fileInfo = new FileInfo(source);
                     if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
                     {
-                        xsdLib = new XsdToJson(source);
+                        var xmlTextReader = new XmlTextReader(source);
+                        xsdLib = new XsdToJson(xmlTextReader);
                         xsdLib.Convert();
                         if (commandLineParser.Arguments.ContainsKey(_paramOutputType))
                         {
