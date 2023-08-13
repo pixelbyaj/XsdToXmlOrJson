@@ -8,11 +8,11 @@
 1. Install the `XSDService` NuGet package.
   * .NET CLI
   ```cs
-    dotnet add package XSDService --version 1.1.1
+    dotnet add package XSDService --version 1.1.3
   ```
   * PackageManager
   ```cs
-  Install-Package XSDService -Version 1.1.1
+  Install-Package XSDService -Version 1.1.3
   ```
 
 ## Usage
@@ -51,6 +51,5 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
 ```
 
 ## Changes
-### Version 1.1.1 release
-  * Date and DateTime supported.
-  * Base Element 'Document' will always be with   minOccurs 1
+### Version 1.1.3 release
+  * New constructors added.

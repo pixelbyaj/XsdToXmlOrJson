@@ -25,8 +25,8 @@ namespace XSDConverter
                     var fileInfo = new FileInfo(source);
                     if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
                     {
-                        var xmlTextReader = new XmlTextReader(source);
-                        xsdLib = new XsdToJson(xmlTextReader);
+                        var streamReader = new StreamReader(source);
+                        xsdLib = new XsdToJson(streamReader);
                         xsdLib.Convert();
                         if (commandLineParser.Arguments.ContainsKey(_paramOutputType))
                         {

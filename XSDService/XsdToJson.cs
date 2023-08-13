@@ -27,10 +27,21 @@ namespace XSDService
             };
             XPath = new List<string>();
         }
-        public XsdToJson(XmlTextReader xmlTextReader)
+        public XsdToJson(Stream input)
         {
-            ArgumentNullException.ThrowIfNull(xmlTextReader, nameof(xmlTextReader));
-            this.xmlTextReader = xmlTextReader;
+            ArgumentNullException.ThrowIfNull(input, nameof(input));
+            xmlTextReader = new XmlTextReader(input);
+            writerSettings = new XmlWriterSettings
+            {
+                ConformanceLevel = ConformanceLevel.Auto,
+                CloseOutput = false
+            };
+            XPath = new List<string>();
+        }
+        public XsdToJson(TextReader input)
+        {
+            ArgumentNullException.ThrowIfNull(input, nameof(input));
+            xmlTextReader = new XmlTextReader(input);
             writerSettings = new XmlWriterSettings
             {
                 ConformanceLevel = ConformanceLevel.Auto,
