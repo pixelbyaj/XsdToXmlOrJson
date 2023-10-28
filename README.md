@@ -53,3 +53,5 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
 ## Changes
 ### Version 1.1.3 release
   * New constructors added.
+### Version 1.1.4 release
+  * Minor bug has been resolved with root document name

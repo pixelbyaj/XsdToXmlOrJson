@@ -103,11 +103,12 @@ namespace XSDService
             };
             foreach (XmlSchemaElement element in myschema.Elements.Values)
             {
+                schemaElement.Name = element.Name;
+                schemaElement.Id = element.Name.ToLowerInvariant();
+                schemaElement.XPath = element.Name;
                 XPath.Add(element.Name);
                 XmlSchemaComplexType complexType = element.ElementSchemaType as XmlSchemaComplexType;
                 Iterate(complexType, schemaElement);
-                XPath = new List<string>();
-
             }
          
             SchemaElement = schemaElement;
