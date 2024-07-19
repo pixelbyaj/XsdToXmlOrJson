@@ -7,6 +7,7 @@ namespace XSDService
     using System.IO;
     using System.Linq;
     using System.Text.Json;
+    using System.Text.Json.Serialization.Metadata;
     using System.Xml;
     using System.Xml.Schema;
 
@@ -65,7 +66,8 @@ namespace XSDService
                     PropertyNameCaseInsensitive = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true
+                    WriteIndented = true,
+                    TypeInfoResolver = new DefaultJsonTypeInfoResolver()
                 };
             }
             jsonSerializerOptions = options;
@@ -113,7 +115,7 @@ namespace XSDService
          
             SchemaElement = schemaElement;
 
-            SchemaJson = JsonSerializer.Serialize<SchemaElement>(SchemaElement, jsonSerializerOptions);
+            SchemaJson = JsonSerializer.Serialize<SchemaElement>(SchemaElement, SchemaElementContext.Default.SchemaElement);
 
         }
         #endregion

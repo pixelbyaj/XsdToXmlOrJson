@@ -2,7 +2,11 @@
   "profiles": {
     "XSDConverter": {
       "commandName": "Project",
-      "commandLineArgs": "/source C:\\source\\xsd\\sample.xsd /outputType json"
+      "commandLineArgs": "/source C:\\source\\xsd\\sample.xsd"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
     }
   }
 }

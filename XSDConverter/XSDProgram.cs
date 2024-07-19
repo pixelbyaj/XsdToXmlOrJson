@@ -8,36 +8,38 @@ namespace XSDConverter
 {
     sealed internal class XSDProgram
     {
-        private const string _paramSource="source";
-        private const string _paramOutputType="outputType";
+        private const string _paramSource = "source";
         private static CommandLineParser commandLineParser;
         private static XsdToJson xsdLib;
         static void Main(string[] args)
         {
+            ArgumentNullException.ThrowIfNull(args);
             if (args.Length > 0)
             {
-                commandLineParser = new CommandLineParser();
-                commandLineParser.Parse(args);
-                if (commandLineParser.Arguments.ContainsKey(_paramSource))
+                var source = args[0];
+                var fileInfo = new FileInfo(source);
+                if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
                 {
-                    var source = commandLineParser.Arguments[_paramSource][0];
-
-                    var fileInfo = new FileInfo(source);
-                    if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
+                    try
                     {
                         var streamReader = new StreamReader(source);
                         xsdLib = new XsdToJson(streamReader);
                         xsdLib.Convert();
-                        if (commandLineParser.Arguments.ContainsKey(_paramOutputType))
-                        {
-                            var target = commandLineParser.Arguments[_paramOutputType][0];
-                            if ("json" == target.ToLowerInvariant())
-                            {
-                                File.WriteAllText(fileInfo.FullName.Replace(".xsd", ".json"), xsdLib.SchemaJson);
-                            }
-                        }
+                        Console.WriteLine(xsdLib.SchemaJson);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
                     }
                 }
+                else
+                {
+                    throw new Exception("No file exist");
+                }
+            }
+            else
+            {
+                throw new Exception("No Argument Found");
             }
         }
     }

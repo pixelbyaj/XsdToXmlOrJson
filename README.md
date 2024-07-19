@@ -8,11 +8,11 @@
 1. Install the `XSDService` NuGet package.
   * .NET CLI
   ```cs
-    dotnet add package XSDService --version 1.1.3
+    dotnet add package XSDService --version 1.1.4
   ```
   * PackageManager
   ```cs
-  Install-Package XSDService -Version 1.1.3
+  Install-Package XSDService -Version 1.1.4
   ```
 
 ## Usage

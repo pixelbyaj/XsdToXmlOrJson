@@ -48,4 +48,9 @@ namespace XSDService
         public List<SchemaElement> Elements { get; set; }
     }
 
+    [JsonSerializable(typeof(SchemaElement))]
+    public partial class SchemaElementContext: JsonSerializerContext
+    {
+
+    }
 }
