@@ -52,6 +52,7 @@ namespace XSDService
         }
         public XsdToJson(string xsdSchema, JsonSerializerOptions options = null)
         {
+            ArgumentNullException.ThrowIfNullOrEmpty(xsdSchema, nameof(xsdSchema));
             xmlTextReader = new XmlTextReader(new StringReader(xsdSchema));
             writerSettings = new XmlWriterSettings
             {

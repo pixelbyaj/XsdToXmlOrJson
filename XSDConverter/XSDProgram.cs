@@ -16,14 +16,35 @@ namespace XSDConverter
             ArgumentNullException.ThrowIfNull(args);
             if (args.Length > 0)
             {
-                var source = args[0];
-                var fileInfo = new FileInfo(source);
-                if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
+                if (args.Length == 1)
                 {
+                    var source = args[0];
+                    var fileInfo = new FileInfo(source);
+                    if (File.Exists(source) && fileInfo.Extension.Equals(".xsd"))
+                    {
+                        try
+                        {
+                            var streamReader = new StreamReader(source);
+                            xsdLib = new XsdToJson(streamReader);
+                            xsdLib.Convert();
+                            Console.WriteLine(xsdLib.SchemaJson);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.ToString());
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("No file exist");
+                    }
+                }
+                else if (args.Length == 2)
+                {
+                    var source = args[0];
                     try
                     {
-                        var streamReader = new StreamReader(source);
-                        xsdLib = new XsdToJson(streamReader);
+                        xsdLib = new XsdToJson(source,null);
                         xsdLib.Convert();
                         Console.WriteLine(xsdLib.SchemaJson);
                     }
@@ -31,10 +52,7 @@ namespace XSDConverter
                     {
                         Console.WriteLine(ex.ToString());
                     }
-                }
-                else
-                {
-                    throw new Exception("No file exist");
+
                 }
             }
             else
