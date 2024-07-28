@@ -107,7 +107,7 @@ namespace XSDService
             foreach (XmlSchemaElement element in myschema.Elements.Values)
             {
                 schemaElement.Name = element.Name;
-                schemaElement.Id = element.Name.ToLowerInvariant();
+                schemaElement.Id = element.Name;
                 schemaElement.XPath = element.Name;
                 XPath.Add(element.Name);
                 XmlSchemaComplexType complexType = element.ElementSchemaType as XmlSchemaComplexType;
@@ -176,7 +176,7 @@ namespace XSDService
                     {
                         Name = childElement.Name,
                         XPath = string.Join("/", XPath.ToArray()),
-                        Id = string.Join("_", XPath.ToArray()).ToLower(),
+                        Id = string.Join("_", XPath.ToArray()),
                         MaxOccurs = System.Convert.ToString(childElement.MaxOccurs == Decimal.MaxValue ? "unbounded" : childElement.MaxOccurs),
                         MinOccurs = System.Convert.ToString(childElement.MinOccurs),
                     };
@@ -203,7 +203,7 @@ namespace XSDService
                         Name = childElement.Namespace,
                         DataType = "any",
                         XPath = string.Join("/", XPath.ToArray()),
-                        Id = string.Join("_", XPath.ToArray()).ToLower()
+                        Id = string.Join("_", XPath.ToArray())
                     };
                     schemaElement.Elements.Add(element);
                     XPath.RemoveAt(XPath.Count - 1);

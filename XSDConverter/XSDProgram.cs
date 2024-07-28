@@ -8,8 +8,6 @@ namespace XSDConverter
 {
     sealed internal class XSDProgram
     {
-        private const string _paramSource = "source";
-        private static CommandLineParser commandLineParser;
         private static XsdToJson xsdLib;
         static void Main(string[] args)
         {
