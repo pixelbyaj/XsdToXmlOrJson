@@ -86,6 +86,7 @@ namespace XSDService
 
         public string SchemaJson { get; private set; }
         public XsdSchema XsdSchema { get; private set; }
+        public SchemaElement SchemaElement { get; private set; }
 
         #endregion
 
@@ -117,7 +118,7 @@ namespace XSDService
                 XmlSchemaComplexType complexType = element.ElementSchemaType as XmlSchemaComplexType;
                 Iterate(complexType, schemaElement);
             }
-
+            SchemaElement = schemaElement;
             XsdSchema xsd = new()
             {
                 Namespace = myschema.TargetNamespace,
