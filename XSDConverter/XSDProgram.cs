@@ -37,21 +37,6 @@ namespace XSDConverter
                         throw new Exception("No file exist");
                     }
                 }
-                else if (args.Length == 2)
-                {
-                    var source = args[0];
-                    try
-                    {
-                        xsdLib = new XsdToJson(source,null);
-                        xsdLib.Convert();
-                        Console.WriteLine(xsdLib.SchemaJson);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-
-                }
             }
             else
             {

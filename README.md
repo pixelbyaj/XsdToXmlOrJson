@@ -29,7 +29,14 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
 }
 ```
 ## Model of JSON
-```json
+```ts
+public class XsdSchema
+{
+  namespace:string;
+  schemaElement:string;
+}
+
+public class SchemaElement
 {
     id: string;
     name: string;
@@ -48,6 +55,32 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
     xpath: string;
     elements: SchemaElement[];
 } 
+```
+### Example
+```json
+{
+    "namespace": "urn:iso:std:iso:20022:tech:xsd:camt.053.001.10",
+    "schemaElement": {
+        "id": "Document",
+        "name": "Document",
+        "dataType": null,
+        "minOccurs": "1",
+        "maxOccurs": null,
+        "minLength": null,
+        "maxLength": null,
+        "pattern": null,
+        "fractionDigits": null,
+        "totalDigits": null,
+        "minInclusive": null,
+        "maxInclusive": null,
+        "values": null,
+        "isCurrency": false,
+        "xpath": "Document",
+        "elements":[
+          ...
+        ]
+    }
+}
 ```
 
 ## Changes

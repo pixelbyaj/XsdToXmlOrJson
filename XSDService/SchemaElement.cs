@@ -7,6 +7,14 @@ using System.Threading.Tasks;
 
 namespace XSDService
 {
+    public class XsdSchema
+    {
+        [JsonPropertyName("namespace")]
+        public string Namespace { get; set; }
+        [JsonPropertyName("schemaElement")]
+        public SchemaElement SchemaElement { get; set; }
+    }
+
     [Serializable]
     public class SchemaElement
     {
@@ -48,8 +56,8 @@ namespace XSDService
         public List<SchemaElement> Elements { get; set; }
     }
 
-    [JsonSerializable(typeof(SchemaElement))]
-    public partial class SchemaElementContext: JsonSerializerContext
+    [JsonSerializable(typeof(XsdSchema))]
+    public partial class XsdSchemaContext : JsonSerializerContext
     {
 
     }

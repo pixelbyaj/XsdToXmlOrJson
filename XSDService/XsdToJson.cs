@@ -83,8 +83,10 @@ namespace XSDService
         #endregion
 
         #region public member
+
         public string SchemaJson { get; private set; }
-        public SchemaElement SchemaElement { get; private set; }
+        public XsdSchema XsdSchema { get; private set; }
+
         #endregion
 
         #region public method
@@ -97,6 +99,7 @@ namespace XSDService
             XmlSchemaSet schemaSet = new();
             schemaSet.Add(myschema);
             schemaSet.Compile();
+            
             var schemaElement = new SchemaElement
             {
                 Name = "Document",
@@ -104,6 +107,7 @@ namespace XSDService
                 Id="document",
                 MinOccurs = "1"
             };
+
             foreach (XmlSchemaElement element in myschema.Elements.Values)
             {
                 schemaElement.Name = element.Name;
@@ -113,10 +117,14 @@ namespace XSDService
                 XmlSchemaComplexType complexType = element.ElementSchemaType as XmlSchemaComplexType;
                 Iterate(complexType, schemaElement);
             }
-         
-            SchemaElement = schemaElement;
 
-            SchemaJson = JsonSerializer.Serialize<SchemaElement>(SchemaElement, SchemaElementContext.Default.SchemaElement);
+            XsdSchema xsd = new()
+            {
+                Namespace = myschema.TargetNamespace,
+                SchemaElement = schemaElement
+            };
+
+            SchemaJson = JsonSerializer.Serialize<XsdSchema>(xsd, XsdSchemaContext.Default.XsdSchema);
 
         }
         #endregion
