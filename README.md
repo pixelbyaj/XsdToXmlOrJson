@@ -29,32 +29,35 @@ if (File.Exists(fileName) && fileInfo.Extension.Equals(".xsd"))
 }
 ```
 ## Model of JSON
-```ts
+```cs
 public class XsdSchema
 {
-  namespace:string;
-  schemaElement:string;
+    [JsonPropertyName("namespace")]
+    public string Namespace { get; set; }
+    [JsonPropertyName("schemaElement")]
+    public SchemaElement SchemaElement { get; set; }
 }
 
 public class SchemaElement
 {
-    id: string;
-    name: string;
-    dataType: string;
-    minOccurs: string;
-    maxOccurs: string;
-    minLength: string;
-    maxLength: string;
-    pattern: string;
-    fractionDigits: string;
-    totalDigits: string;
-    minInclusive: string;
-    maxInclusive: string;
-    values: string[];
-    isCurrency: boolean;
-    xpath: string;
-    elements: SchemaElement[];
-} 
+    
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string DataType { get; set; }
+    public string MinOccurs { get; set; }
+    public string MaxOccurs { get; set; }
+    public string MinLength { get; set; }
+    public string MaxLength { get; set; }
+    public string Pattern { get; set; }
+    public string FractionDigits { get; set; }
+    public string TotalDigits { get; set; }
+    public string MinInclusive { get; set; }
+    public string MaxInclusive { get; set; }
+    public string[] Values { get; set; }
+    public bool IsCurrency { get; set; }
+    public string XPath { get; set; }
+    public List<SchemaElement> Elements { get; set; }
+}
 ```
 ### Example
 ```json
@@ -84,7 +87,5 @@ public class SchemaElement
 ```
 
 ## Changes
-### Version 1.1.3 release
-  * New constructors added.
-### Version 1.1.4 release
-  * Minor bug has been resolved with root document name
+### Version 1.3.0 release
+  * New output model.
