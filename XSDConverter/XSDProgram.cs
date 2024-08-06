@@ -3,6 +3,7 @@ using System.Xml;
 using System.Collections.Generic;
 using System.IO;
 using XSDService;
+using System.Text.Json;
 
 namespace XSDConverter
 {
@@ -27,20 +28,24 @@ namespace XSDConverter
                             xsdLib.Convert();
                             Console.WriteLine(xsdLib.SchemaJson);
                         }
+                        catch(JsonException ex)
+                        {
+                            Console.Error.WriteLine($"Much nested node structure found. {ex.Message}");
+                        }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.ToString());
+                            Console.Error.WriteLine(ex.ToString());
                         }
                     }
                     else
                     {
-                        throw new Exception("No file exist");
+                        Console.Error.WriteLine("No file exist");
                     }
                 }
             }
             else
             {
-                throw new Exception("No Argument Found");
+                Console.Error.WriteLine("No Argument Found");
             }
         }
     }

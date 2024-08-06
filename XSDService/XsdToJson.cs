@@ -4,6 +4,8 @@ namespace XSDService
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Text.Json;
@@ -80,6 +82,7 @@ namespace XSDService
         private readonly XmlTextReader xmlTextReader;
         private List<string> XPath;
         private readonly JsonSerializerOptions jsonSerializerOptions;
+        const int MAX_DEPTH = 64;
         #endregion
 
         #region public member
@@ -100,12 +103,12 @@ namespace XSDService
             XmlSchemaSet schemaSet = new();
             schemaSet.Add(myschema);
             schemaSet.Compile();
-            
+
             var schemaElement = new SchemaElement
             {
                 Name = "Document",
                 XPath = "Document",
-                Id="document",
+                Id = "document",
                 MinOccurs = "1"
             };
 
@@ -133,9 +136,9 @@ namespace XSDService
         #region private method
         private void Iterate(XmlSchemaComplexType complexType, SchemaElement schemaElement)
         {
-            if(complexType.BaseXmlSchemaType.BaseXmlSchemaType != null && complexType.BaseXmlSchemaType is XmlSchemaSimpleType)
+            if (complexType.BaseXmlSchemaType.BaseXmlSchemaType != null && complexType.BaseXmlSchemaType is XmlSchemaSimpleType)
             {
-                GetSimpleType(complexType.BaseXmlSchemaType as XmlSchemaSimpleType,schemaElement);
+                GetSimpleType(complexType.BaseXmlSchemaType as XmlSchemaSimpleType, schemaElement);
             }
 
             if (complexType.AttributeUses.Count > 0)
@@ -147,7 +150,7 @@ namespace XSDService
                 {
                     XmlSchemaAttribute attribute =
                         (XmlSchemaAttribute)enumerator.Value;
-                    if (attribute.Name.Equals("Ccy"))
+                    if (!string.IsNullOrEmpty(attribute.Name) && attribute.Name.Equals("Ccy"))
                     {
                         schemaElement.IsCurrency = true;
                         XmlSchemaPatternFacet content = (attribute.AttributeSchemaType.Content as XmlSchemaSimpleTypeRestriction).Facets[0] as XmlSchemaPatternFacet;
@@ -160,7 +163,6 @@ namespace XSDService
             if (complexType.ContentTypeParticle is XmlSchemaSequence sequence)
             {
                 AddSchemaElement(sequence.Items, schemaElement);
-
             }
             else if (complexType.ContentTypeParticle is XmlSchemaChoice schemaChoice)
             {
@@ -172,6 +174,7 @@ namespace XSDService
         {
             Iterate(xmlSchemaComplexType, schemaElement);
         }
+
         private void AddSchemaElement(XmlSchemaObjectCollection xmlSchemaObjectCollection, SchemaElement schemaElement)
         {
             for (int i = 0; i < xmlSchemaObjectCollection.Count; i++)
@@ -181,6 +184,10 @@ namespace XSDService
                     var childElement = xmlSchemaObjectCollection[i] as XmlSchemaElement;
 
                     XPath.Add(childElement.Name);
+                    if (XPath.Count >= MAX_DEPTH)
+                    {
+                        throw new JsonException($"CurrentDepth {MAX_DEPTH} is equal to or larger than the maximum allowed depth of {MAX_DEPTH}");
+                    }
                     var element = new SchemaElement
                     {
                         Name = childElement.Name,
@@ -190,17 +197,28 @@ namespace XSDService
                         MinOccurs = System.Convert.ToString(childElement.MinOccurs),
                     };
 
+
                     if (childElement.ElementSchemaType is XmlSchemaComplexType xmlSchemaComplexType)
                     {
                         GetComplexType(xmlSchemaComplexType, element);
-
                     }
+
                     else if (childElement.ElementSchemaType is XmlSchemaSimpleType xmlSchemaSimpleType)
                     {
                         GetSimpleType(xmlSchemaSimpleType, element);
                     }
                     schemaElement.Elements.Add(element);
                     XPath.RemoveAt(XPath.Count - 1);
+                }
+                else if (xmlSchemaObjectCollection[i] is XmlSchemaChoice)
+                {
+                    var childElement = xmlSchemaObjectCollection[i] as XmlSchemaChoice;
+                    var element = new SchemaElement
+                    {
+                        DataType = "choice"
+                    };
+                    AddSchemaElement(childElement.Items, element);
+                    schemaElement.Elements.Add(element);
                 }
                 else if (xmlSchemaObjectCollection[i] is XmlSchemaAny)
                 {

@@ -2,7 +2,7 @@
   "profiles": {
     "XSDConverter": {
       "commandName": "Project",
-      "commandLineArgs": "C:\\source\\xsd\\camt.053.001.10.xsd"
+      "commandLineArgs": "C:\\source\\xsd\\explanatorynote-01-03.xsd"
     },
     "WSL": {
       "commandName": "WSL2",

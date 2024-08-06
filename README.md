@@ -38,7 +38,6 @@ public class XsdSchema
 
 public class SchemaElement
 {
-    
     public string Id { get; set; }
     public string Name { get; set; }
     public string DataType { get; set; }
@@ -85,8 +84,11 @@ public class SchemaElement
 ```
 
 ## Changes
-## Version 1.3.1 release
-  * Convert JSON to ISO20022 XML Message 
+## Version 1.3.5 release
+  * Throw JsonException the case where it found deep nested node structure.
+  * CurrentDepth (64) is equal to or larger than the maximum allowed depth of (64)
+## Usage
+
 ## Usage
 
 ```c#
